@@ -1,6 +1,6 @@
 <template>
   <div>
-      <router-link to="/feed">Feed Page</router-link>
+    
     <form action="javascript:void(0)">
       <input type="text" ref="email_input" placeholder="email" /><br />
       <input type="text" ref="username_input" placeholder="username" /><br />
@@ -41,8 +41,8 @@ export default {
         })
         .then((response) => {
           this.users = response.data;
-          Cookies.set("login_token", response.data.loginToken);
-          <router-link to="/feed">Feed Page</router-link>
+          cookies.set("login_token", response.data.loginToken);
+          this.$router.push ({path: '/feed'});
         })
         .catch((error) => {
           error;
