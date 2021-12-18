@@ -17,7 +17,7 @@ import UserTweet from '@/components/UserTweet.vue'
         components: {
             TweetPost,
             UserTweet,
-            
+              
         },
         methods: {
             react_to_post_sent(payload) {

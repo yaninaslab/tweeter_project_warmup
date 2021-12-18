@@ -43,7 +43,6 @@ export default {
          
           this.$emit('post_sent', "The post has been successfully sent!")
     
-        
         })
         .catch((error) => {
           error.message;
@@ -60,4 +59,7 @@ export default {
 </script>
 
 <style scoped>
+input, textarea {
+    margin: 5px;
+}
 </style>
