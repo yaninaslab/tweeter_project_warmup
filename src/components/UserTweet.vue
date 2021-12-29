@@ -8,7 +8,6 @@
             <p>{{ tweet.content }}</p>
             <h6>{{ tweet.createdAt }}</h6>
 <delete-tweet @post_deleted="react_to_post_deleted" :tweetId="tweet.tweetId"></delete-tweet>
-
         </article>
     </div>
     </div>
@@ -22,12 +21,13 @@ import DeleteTweet from '@/components/DeleteTweet.vue'
     export default {
         name: "user-tweet",
         components: {
-            DeleteTweet,
+            DeleteTweet
         },
         methods: {
             react_to_post_deleted(payload) {
                 this.success_message = payload;
             },
+            
         },
 
        computed: {

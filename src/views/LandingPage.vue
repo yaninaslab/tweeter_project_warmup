@@ -14,6 +14,14 @@ import LoginForm from '@/components/LoginForm.vue'
             RegisterForm,
             LoginForm,
         },
+        methods: {
+    
+        },
+        data() {
+            return {
+                
+            }
+        },
     }
 </script>
 
