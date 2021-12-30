@@ -1,27 +1,27 @@
 <template>
-  <div>
-      <form action="javascript:void(0)">
-    <input type="text" ref="email_input" placeholder="email" /><br />
-    <input type="text" ref="password_input" placeholder="password" /><br />
-    <input
+  <div class="login">
+    <form action="javascript:void(0)">
+      <input type="text" ref="email_input" placeholder="email" /><br />
+      <input type="text" ref="password_input" placeholder="password" /><br />
+      <input class="buttons"
         @click="attempt_login"
         type="submit"
         ref="login_submit"
-        value="Login"
+        value="Log In"
       />
-      </form>
+    </form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import cookies from 'vue-cookies';
+import cookies from "vue-cookies";
 axios.defaults.headers.common["X-Api-Key"] =
   "i02PMVITFLBLyry786rGgMUG4xTrG25xAoDXaQ0qURf2d";
 export default {
   name: "login-form",
   methods: {
-      attempt_login() {
+    attempt_login() {
       axios
         .request({
           url: "https://tweeterest.ga/api/login",
@@ -35,7 +35,7 @@ export default {
         .then((response) => {
           this.users = response.data;
           cookies.set("login_token", response.data.loginToken);
-          this.$router.push ({path: '/feed'});
+          this.$router.push({ path: "/feed" });
         })
         .catch((error) => {
           error.message;
@@ -52,9 +52,21 @@ export default {
 
 <style scoped>
 form {
-    margin-top: 50px;
+  margin-top: 30px;
 }
 input {
-    margin: 5px;
+  width: 250px;
+  height: 30px;
+  margin: 5px;
+  border: 1px solid skyblue;
+}
+.login {
+  position: absolute;
+  margin-left: 60%;
+}
+.buttons {
+  width: 250px;
+  height: 40px;
+  background-color: skyblue;
 }
 </style>

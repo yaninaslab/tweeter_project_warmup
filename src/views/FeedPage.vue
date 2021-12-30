@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <logout-button @log_out="react_to_logout"></logout-button>
-<tweet-post @post_sent="react_to_post_sent">
-
-</tweet-post>
-<h2>{{ success_message }}</h2>
-<user-tweet></user-tweet>
-    </div>
+  <div>
+    <logout-button @log_out="react_to_logout"></logout-button>
+    <tweet-post @post_sent="react_to_post_sent"> </tweet-post>
+    <h2>{{ success_message }}</h2>
+    <user-tweet></user-tweet>
+  </div>
 </template>
 
 <script>
+import cookies from "vue-cookies";
 import TweetPost from '@/components/TweetPost.vue'
 import UserTweet from '@/components/UserTweet.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
@@ -36,6 +35,10 @@ import LogoutButton from '@/components/LogoutButton.vue'
         },
         mounted () {
             this.get_tweets();
+            let login_token = cookies.get("login_token");
+      if(!login_token) {
+          this.$router.push({ path: "/" })
+        }
         },
         data() {
             return {
@@ -47,5 +50,4 @@ import LogoutButton from '@/components/LogoutButton.vue'
 </script>
 
 <style scoped>
-
 </style>

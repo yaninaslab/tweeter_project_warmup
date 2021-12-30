@@ -1,17 +1,16 @@
 <template>
-  <div>
-    
+  <div class="register">
     <form action="javascript:void(0)">
       <input type="text" ref="email_input" placeholder="email" /><br />
       <input type="text" ref="username_input" placeholder="username" /><br />
       <input type="text" ref="password_input" placeholder="password" /><br />
       <input type="text" ref="bio_input" placeholder="bio" /><br />
-      <input type="text" ref="dob_input" placeholder="DOB" /><br />
-      <input
+      <input type="text" ref="dob_input" placeholder="YYYY-MM-DD" /><br />
+      <input class="buttons"
         @click="register_user"
         type="submit"
         ref="login_submit"
-        value="Register"
+        value="Sign Up"
       />
     </form>
   </div>
@@ -60,9 +59,21 @@ export default {
 
 <style scoped>
 form {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 input {
+    width: 250px;
+    height: 30px;
     margin: 5px;
+    border: 1px solid skyblue;
+}
+.register {
+  position: absolute;
+  margin-left: 20%;
+}
+.buttons {
+  width: 250px;
+  height: 40px;
+  background-color: skyblue;
 }
 </style>
