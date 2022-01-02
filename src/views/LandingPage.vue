@@ -1,33 +1,34 @@
 <template>
   <div>
-      <page-header></page-header>
+      <h2 v-if="logout_message || user_deleted_message">{{ logout_message || user_deleted_message }}</h2>
     <div class="title-grid">
       <h1 class="sign_up">Sign Up</h1>
       <h1 class="log_in">Log In</h1>
     </div>
     <register-form></register-form>
     <login-form></login-form>
-    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
-import PageHeader from "@/components/PageHeader.vue"
-import PageFooter from "@/components/PageFooter.vue"
 import RegisterForm from "@/components/RegisterForm.vue";
 import LoginForm from "@/components/LoginForm.vue";
 export default {
   name: "landing-page",
   components: {
-    PageHeader,
-    PageFooter,
     RegisterForm,
     LoginForm,
   },
-  methods: {},
-  data() {
-    return {};
+  computed: {
+      logout_message() {
+          return this.$route.query.logout ? "You have successfully logged out!" : null
+      },
+      user_deleted_message() {
+        return this.$route.query.user_deleted ? "Your user has been successfully deleted!" : null
+      }
   },
+  methods: {},
+  
 };
 </script>
 

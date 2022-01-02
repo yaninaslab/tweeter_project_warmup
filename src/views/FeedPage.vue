@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import cookies from "vue-cookies";
 import TweetPost from '@/components/TweetPost.vue'
 import UserTweet from '@/components/UserTweet.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
@@ -35,10 +34,6 @@ import LogoutButton from '@/components/LogoutButton.vue'
         },
         mounted () {
             this.get_tweets();
-            let login_token = cookies.get("login_token");
-      if(!login_token) {
-          this.$router.push({ path: "/" })
-        }
         },
         data() {
             return {

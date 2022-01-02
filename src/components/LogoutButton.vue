@@ -22,14 +22,10 @@ export default {
             loginToken: this.login_token,
           },
         })
-        .then((response) => {
-            //console.log(response);
-          //this.users = response.data;
-          //cookies.remove("login_token");
-          if(this.login_token === response.data.loginToken) {
-          cookies.remove("login_token")}
-          this.$emit("log_out", "You have successfully logged out!");
-          this.$router.push({ path: "/" });
+        .then(() => {
+        
+          this.$store.dispatch('log_out');
+          this.$router.push({ path: "/", query: {logout:true} });
         })
         .catch((error) => {
           error.message;

@@ -75,5 +75,6 @@ input {
   width: 250px;
   height: 40px;
   background-color: skyblue;
+  border-radius: 5px;
 }
 </style>

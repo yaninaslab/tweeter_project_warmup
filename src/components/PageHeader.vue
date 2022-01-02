@@ -3,6 +3,7 @@
         <img class="logo" src="../assets/logo.jpg" alt="" />
         <router-link class="links" to="/">Home</router-link>
         <router-link class="links" to="/feed">Feed</router-link>
+        <router-link class="links" to="/profile">Profile</router-link>
     </header>
 </template>
 

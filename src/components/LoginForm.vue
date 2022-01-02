@@ -33,8 +33,10 @@ export default {
           },
         })
         .then((response) => {
-          this.users = response.data;
+
+          this.$store.commit('update_user', response.data)
           cookies.set("login_token", response.data.loginToken);
+          cookies.set("user_id", response.data.userId);
           this.$router.push({ path: "/feed" });
         })
         .catch((error) => {
@@ -42,11 +44,7 @@ export default {
         });
     },
   },
-  data() {
-    return {
-      users: {},
-    };
-  },
+  
 };
 </script>
 
@@ -68,5 +66,6 @@ input {
   width: 250px;
   height: 40px;
   background-color: skyblue;
+  border-radius: 5px;
 }
 </style>
