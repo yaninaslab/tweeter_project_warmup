@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <button @click="delete_tweet">Delete Tweet</button>
+  <div class="icons_grid">
+    <img class="icons" @click="comment_tweet" src="../assets/message_icon.jpg" alt="">
+    <img class="icons" @click="like_tweet" src="../assets/like_icon.jpg" alt="">
+    <img class="icons" @click="delete_tweet" src="../assets/bin_icon.jpg" alt="">
+    
   </div>
 </template>
 
@@ -42,4 +45,14 @@ export default {
 </script>
 
 <style scoped>
+.icons {
+  width: 20px;
+  height: 20px;
+}
+.icons_grid {
+  display: grid;
+  place-items: center;
+  grid-auto-flow: column;
+  padding: 5px;
+}
 </style>
