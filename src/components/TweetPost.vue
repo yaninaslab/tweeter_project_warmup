@@ -1,14 +1,12 @@
 <template>
   <div>
-    <textarea
-      name=""
+    <input class="twitter"
+      v-model="text"
       ref="text_input"
-      cols="30"
-      rows="10"
-      placeholder="Post here"
-    ></textarea
+      placeholder="What's up?"
+      maxlength="280"
     ><br />
-    <input type="text" ref="image_input" placeholder="imageURL" /><br />
+    <input class="twitter_image" type="text" ref="image_input" placeholder="imageURL" /><br />
     <input
       @click="make_post"
       type="submit"
@@ -59,6 +57,23 @@ export default {
 </script>
 
 <style scoped>
+.twitter, .twitter_image {
+  width: 350px;
+  border-radius: 5px;
+  background: white;
+  border: 1px solid skyblue;
+  outline: none;
+  padding: 10px;
+}
+.twitter:focus,
+.twitter_image:focus {
+  border: 1px solid #56b4ef;
+  box-shadow: 0px 0px 3px 1px #c8def0;
+}
+.twitter_image {
+  width: 200px;
+  height: 8px;
+}
 input, textarea {
     margin: 5px;
 }

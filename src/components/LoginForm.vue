@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <form action="javascript:void(0)">
-      <input type="text" ref="email_input" placeholder="email" /><br />
-      <input type="text" ref="password_input" placeholder="password" /><br />
+      <input class="twitter" type="text" ref="email_input" placeholder="email" /><br />
+      <input class="twitter" type="password" ref="password_input" placeholder="password" /><br />
       <input class="buttons"
         @click="attempt_login"
         type="submit"
@@ -52,9 +52,19 @@ export default {
 form {
   margin-top: 30px;
 }
+.twitter {
+  width: 350px;
+  border-radius: 5px;
+  background: white;
+  border: 1px solid skyblue;
+  outline: none;
+  padding: 10px;
+}
+.twitter:focus {
+  border: 1px solid #56b4ef;
+  box-shadow: 0px 0px 3px 1px #c8def0;
+}
 input {
-  width: 250px;
-  height: 30px;
   margin: 5px;
   border: 1px solid skyblue;
 }
@@ -67,5 +77,8 @@ input {
   height: 40px;
   background-color: skyblue;
   border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
 }
 </style>

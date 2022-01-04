@@ -51,6 +51,6 @@ import DeleteTweet from '@/components/DeleteTweet.vue'
     margin-top: 30px;
 }
 article {
-    border: solid;
+    border: 1px solid skyblue;
 }
 </style>

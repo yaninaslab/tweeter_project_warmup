@@ -1,11 +1,11 @@
 <template>
   <div class="register">
     <form action="javascript:void(0)">
-      <input type="text" ref="email_input" placeholder="email" /><br />
-      <input type="text" ref="username_input" placeholder="username" /><br />
-      <input type="text" ref="password_input" placeholder="password" /><br />
-      <input type="text" ref="bio_input" placeholder="bio" /><br />
-      <input type="text" ref="dob_input" placeholder="YYYY-MM-DD" /><br />
+      <input class="twitter" type="text" ref="email_input" placeholder="email" /><br />
+      <input class="twitter" type="text" ref="username_input" placeholder="username" /><br />
+      <input class="twitter" type="password" ref="password_input" placeholder="password" /><br />
+      <input class="twitter" type="text" ref="bio_input" placeholder="bio" /><br />
+      <input class="twitter" type="text" ref="dob_input" placeholder="YYYY-MM-DD" /><br />
       <input class="buttons"
         @click="register_user"
         type="submit"
@@ -62,8 +62,6 @@ form {
     margin-top: 30px;
 }
 input {
-    width: 250px;
-    height: 30px;
     margin: 5px;
     border: 1px solid skyblue;
 }
@@ -76,5 +74,20 @@ input {
   height: 40px;
   background-color: skyblue;
   border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+}
+.twitter {
+  width: 350px;
+  border-radius: 5px;
+  background: white;
+  border: 1px solid skyblue;
+  outline: none;
+  padding: 10px;
+}
+.twitter:focus {
+  border: 1px solid #56b4ef;
+  box-shadow: 0px 0px 3px 1px #c8def0;
 }
 </style>

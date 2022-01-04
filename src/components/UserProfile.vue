@@ -8,15 +8,15 @@
       <label for="dob">Birthdate</label>
     </article>
     <article class="update_info">
-      <input disabled :value="user.userId" />
+      <input class="twitter" disabled :value="user.userId" />
 
-      <input type="text" ref="user_email" :value="user.email" />
+      <input class="twitter" type="text" ref="user_email" :value="user.email" />
 
-      <input type="text" ref="username" :value="user.username" />
+      <input class="twitter" type="text" ref="username" :value="user.username" />
 
-      <input type="text" ref="bio" :value="user.bio" />
+      <input class="twitter" type="text" ref="bio" :value="user.bio" />
 
-      <input
+      <input class="twitter"
         type="text"
         ref="dob"
         placeholder="YYYY-MM-DD"
@@ -95,14 +95,28 @@ input {
   margin: 5px;
   border: 1px solid skyblue;
 }
+.twitter {
+  width: 350px;
+  border-radius: 5px;
+  background: white;
+  border: 1px solid skyblue;
+  outline: none;
+  padding: 10px;
+}
+.twitter:focus {
+  border: 1px solid #56b4ef;
+  box-shadow: 0px 0px 3px 1px #c8def0;
+}
 .buttons {
-  width: 100px;
+  width: 150px;
   height: 40px;
   justify-self: center;
   align-self: end;
   margin-bottom: 3px;
   background-color: skyblue;
   border-radius: 5px;
-  border: 1px solid skyblue;
+  color: white;
+  font-weight: bold;
+  font-size: large;
 }
 </style>
