@@ -1,13 +1,20 @@
 <template>
   <div>
-    <input class="twitter"
+    <input
+      class="twitter"
       v-model="text"
       ref="text_input"
       placeholder="What's up?"
       maxlength="280"
-    ><br />
-    <input class="twitter_image" type="text" ref="image_input" placeholder="imageURL" /><br />
-    <input class="twitter_btn"
+    /><br />
+    <input
+      class="twitter_image"
+      type="text"
+      ref="image_input"
+      placeholder="imageURL"
+    /><br />
+    <input
+      class="twitter_btn"
       @click="make_post"
       type="submit"
       ref="login_submit"
@@ -31,16 +38,15 @@ export default {
 
           method: "POST",
           data: {
-            loginToken: this.login_token,  
+            loginToken: this.login_token,
             content: this.$refs.text_input.value,
             imageUrl: this.$refs.image_input.value,
           },
         })
         .then((response) => {
           this.tweets = response.data;
-         
-          this.$emit('post_sent', "The post has been successfully sent!")
-    
+
+          this.$emit("post_sent", "The post has been successfully sent!");
         })
         .catch((error) => {
           error.message;
@@ -48,16 +54,17 @@ export default {
     },
   },
   data() {
-      return {
-          tweets: {},
-          login_token: cookies.get("login_token")
-      }
+    return {
+      tweets: {},
+      login_token: cookies.get("login_token"),
+    };
   },
 };
 </script>
 
 <style scoped>
-.twitter, .twitter_image {
+.twitter,
+.twitter_image {
   width: 350px;
   border-radius: 5px;
   background: white;
@@ -84,7 +91,8 @@ export default {
   width: 200px;
   height: 8px;
 }
-input, textarea {
-    margin: 5px;
+input,
+textarea {
+  margin: 5px;
 }
 </style>
