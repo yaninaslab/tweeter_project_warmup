@@ -27,7 +27,6 @@ import DeleteTweet from '@/components/DeleteTweet.vue'
             react_to_post_deleted(payload) {
                 this.success_message = payload;
             },
-            
         },
 
        computed: {

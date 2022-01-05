@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     tweets: [],
     users: [],
-    user: {}
+    user: {},
   },
   mutations: {
     update_tweets(state, payload) {
@@ -20,7 +20,7 @@ export default new Vuex.Store({
     },
     update_user(state, payload) {
       state.user = payload;
-    }
+    },
   },
   actions: {
     get_tweets(store) {
@@ -60,7 +60,8 @@ export default new Vuex.Store({
       cookies.remove("login_token");
       cookies.remove("user_id");
       store.commit('update_user', {});
-    }
+    },
+  
   },
 
 })

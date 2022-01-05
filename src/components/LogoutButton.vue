@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="log_out">Logout</button>
+    <button class="twitter_btn" @click="log_out">Logout</button>
   </div>
 </template>
 
@@ -42,4 +42,14 @@ export default {
 
 
 <style scoped>
+.twitter_btn {
+  width: 150px;
+  height: 40px;
+  background-color: skyblue;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  border: 1px solid skyblue;
+}
 </style>

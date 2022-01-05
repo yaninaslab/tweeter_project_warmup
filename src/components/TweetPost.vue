@@ -7,11 +7,11 @@
       maxlength="280"
     ><br />
     <input class="twitter_image" type="text" ref="image_input" placeholder="imageURL" /><br />
-    <input
+    <input class="twitter_btn"
       @click="make_post"
       type="submit"
       ref="login_submit"
-      value="Make Post"
+      value="Add Tweet"
     />
   </div>
 </template>
@@ -69,6 +69,16 @@ export default {
 .twitter_image:focus {
   border: 1px solid #56b4ef;
   box-shadow: 0px 0px 3px 1px #c8def0;
+}
+.twitter_btn {
+  width: 150px;
+  height: 40px;
+  background-color: skyblue;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  border: 1px solid skyblue;
 }
 .twitter_image {
   width: 200px;
