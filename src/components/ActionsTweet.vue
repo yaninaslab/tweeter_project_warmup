@@ -1,15 +1,17 @@
 <template>
   <div class="icons_grid">
-    <img @click="show_popup" class="icons" src="../assets/message_icon.jpg" alt="" />
-    <div class="modal active">
+    <img @click="show_modal" class="icons" src="../assets/message_icon.jpg" alt="" />
+    <div v-if="is_modal" class="modal active">
       <div class="modal_header">
-      <button data-close-button class="close-button">&times;</button>
+      <button @click="close_modal" class="close-button">&times;</button>
       <input class="twitter"
       v-model="text"
       ref="text_input"
       placeholder="What's up?"
       maxlength="280"
-    ><br /></div>
+    >
+      <br />
+    </div>
     <input class="twitter_btn"
       @click="make_post"
       type="submit"
@@ -21,18 +23,19 @@
     </div>
     <img
       class="icons"
-      src="https://www.reshot.com/preview-assets/icons/2HQA9X7CYJ/heartrate-2HQA9X7CYJ.svg"
-      v-if="is_liked"
-      @click="unlike_tweet"
+      src="https://www.reshot.com/preview-assets/icons/N3PUY2B9JX/heart-like-N3PUY2B9JX.svg"
+      v-if="!is_user_liked"
+      @click="like_tweet"
       alt=""
     />
     <img
       class="icons"
-      src="https://www.reshot.com/preview-assets/icons/N3PUY2B9JX/heart-like-N3PUY2B9JX.svg"
+      src="https://www.reshot.com/preview-assets/icons/2HQA9X7CYJ/heartrate-2HQA9X7CYJ.svg"
       v-else
-      @click="like_tweet"
+      @click="unlike_tweet"
       alt=""
     />
+    <span v-if="likes">{{likes}}</span>
 
     <img
       class="icons"
@@ -49,7 +52,7 @@ import cookies from "vue-cookies";
 axios.defaults.headers.common["X-Api-Key"] =
   "i02PMVITFLBLyry786rGgMUG4xTrG25xAoDXaQ0qURf2d";
 export default {
-  name: "delete-tweet",
+  name: "actions-tweet",
   methods: {
     delete_tweet() {
       axios
@@ -70,6 +73,7 @@ export default {
     },
 
     like_tweet() {
+      console.log('like tweet');
       axios
         .request({
           url: "https://tweeterest.ga/api/tweet-likes",
@@ -105,12 +109,29 @@ export default {
     },
 
     change_like() {
-      if (this.is_liked === false) {
-        this.is_liked = true;
+      if (this.is_user_liked === false) {
+        this.is_user_liked = true;
+        this.likes++;
       } else {
-        this.is_liked = false;
+        this.is_user_liked = false;
+        this.likes--;
       }
     },
+    show_modal() {
+      this.is_modal = true;
+    },
+    close_modal() {
+      this.is_modal = false;
+    }
+  },
+  created () {
+    axios.request({
+      url: "https://tweeterest.ga/api/tweet-likes?tweetId="+this.tweetId,
+      method: "GET",
+    }).then((response) => {
+       this.likes = response.data.length;
+       this.is_user_liked = Boolean(response.data.find(item => item.userId === this.$store.state.user.userId));
+    }).catch(console.error);
   },
   props: {
     tweetId: Number,
@@ -118,7 +139,9 @@ export default {
   data() {
     return {
       login_token: cookies.get("login_token"),
-      is_liked: false,
+      is_modal: false,
+      likes: 0,
+      is_user_liked: false,
     };
   },
 };

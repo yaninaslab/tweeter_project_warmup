@@ -30,6 +30,7 @@ import LogoutButton from '@/components/LogoutButton.vue'
             },
             get_tweets() {
                 this.$store.dispatch('get_tweets');
+                console.log(this.$store.state.tweets);
             }
         },
         mounted () {

@@ -7,7 +7,7 @@
             <h5>{{ tweet.username }}</h5>
             <p>{{ tweet.content }}</p>
             <h6>{{ tweet.createdAt }}</h6>
-<delete-tweet @post_deleted="react_to_post_deleted" :tweetId="tweet.tweetId"></delete-tweet>
+            <actions-tweet @post_deleted="react_to_post_deleted" :tweetId="tweet.tweetId"></actions-tweet>
         </article>
     </div>
     </div>
@@ -17,11 +17,11 @@
 import axios from "axios";
 axios.defaults.headers.common["X-Api-Key"] =
   "i02PMVITFLBLyry786rGgMUG4xTrG25xAoDXaQ0qURf2d";
-import DeleteTweet from '@/components/DeleteTweet.vue'
+import ActionsTweet from '@/components/ActionsTweet.vue'
     export default {
         name: "user-tweet",
         components: {
-            DeleteTweet
+            ActionsTweet
         },
         methods: {
             react_to_post_deleted(payload) {
