@@ -2,8 +2,9 @@
   <div>
     <logout-button @log_out="react_to_logout"></logout-button>
     <tweet-post @post_sent="react_to_post_sent"> </tweet-post>
-    <h2>{{ success_message }}</h2>
-    <user-tweet></user-tweet>
+    <h2>{{ post_message }}</h2>
+    <user-tweet @click="react_to_comment_added"></user-tweet>
+    <h2>{{ comment_message }}</h2>
   </div>
 </template>
 
@@ -22,8 +23,11 @@ import LogoutButton from '@/components/LogoutButton.vue'
         },
         methods: {
             react_to_post_sent(payload) {
-                this.success_message = payload;
+                this.post_message = payload;
                 
+            },
+            react_to_comment_added(payload) {
+                this.comment_message = payload;
             },
             react_to_logout(payload){
                 this.logout_success = payload;
@@ -38,8 +42,9 @@ import LogoutButton from '@/components/LogoutButton.vue'
         },
         data() {
             return {
-                success_message: undefined,
-                logout_success: undefined
+                post_message: undefined,
+                logout_success: undefined,
+                comment_message: undefined
             }
         },
     }

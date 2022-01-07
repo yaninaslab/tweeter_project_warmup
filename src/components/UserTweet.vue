@@ -7,7 +7,8 @@
             <h5>{{ tweet.username }}</h5>
             <p>{{ tweet.content }}</p>
             <h6>{{ tweet.createdAt }}</h6>
-            <actions-tweet @post_deleted="react_to_post_deleted" :tweetId="tweet.tweetId"></actions-tweet>
+            <actions-tweet 
+            @post_deleted="react_to_post_deleted" :tweetId="tweet.tweetId"></actions-tweet>
         </article>
     </div>
     </div>

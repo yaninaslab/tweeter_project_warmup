@@ -2,14 +2,12 @@
   <div>
     <input
       class="twitter"
-      v-model="text"
       ref="text_input"
       placeholder="What's up?"
       maxlength="280"
     /><br />
     <input
       class="twitter_image"
-      type="text"
       ref="image_input"
       placeholder="imageURL"
     /><br />

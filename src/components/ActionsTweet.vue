@@ -1,17 +1,18 @@
 <template>
   <div class="icons_grid">
+    <div class="comments">
     <img
       @click="show_modal"
       class="icons"
       src="../assets/message_icon.jpg"
       alt=""
     />
+    <span class="comments_number" v-if="comments">{{ comments }}</span></div>
     <div v-if="is_modal" class="modal active">
       <div class="modal_header">
         <button @click="close_modal" class="close-button">&times;</button>
         <input
           class="twitter"
-          v-model="text"
           ref="text_input"
           placeholder="What's up?"
           maxlength="280"
@@ -20,10 +21,10 @@
       </div>
       <input
         class="twitter_btn"
-        @click="make_post"
+        @click="add_comment"
         type="submit"
         ref="login_submit"
-        value="Add Tweet"
+        value="Add Comment"
       />
       <div class="overlay"></div>
     </div>
@@ -130,30 +131,65 @@ export default {
     close_modal() {
       this.is_modal = false;
     },
+    add_comment() {
+      axios
+        .request({
+          url: "https://tweeterest.ga/api/comments",
+
+          method: "POST",
+          data: {
+            loginToken: this.login_token,
+            tweetId: `${this.tweetId}`,
+            content: this.$refs.text_input.value,
+          },
+        })
+        .then((response) => {
+          this.tweets = response.data;
+          this.comments++
+
+          this.$emit("comment_added", "The comment has been successfully added!");
+        })
+        .catch((error) => {
+          error.message;
+        });
+    },
   },
   created() {
     axios
       .request({
-        url: "https://tweeterest.ga/api/tweet-likes?tweetId=" + this.tweetId,
+        url: "https://tweeterest.ga/api/tweet-likes",
         method: "GET",
+        params: {
+          tweetId: this.tweetId
+        }
       })
       .then((response) => {
-      
-       this.likes = response.data.length;
-       for(var i = 0; i < this.likes.length; i++)
-       
-       if(this.is_user_liked === true) {
-         this.$store.state.user.userId
-       }else {
-         this.is_user_liked = false;
-       }
-        /* this.likes = response.data.length;
-        this.is_user_liked = Boolean(
-          response.data.find(
-            (item) => item.userId === this.$store.state.user.userId
-          )
-        ); */
+        this.likes = response.data.length;
+        for (var i = 0; i < response.data.length; i++){
+          if(cookies.get('user_id') == response.data[i]['userId'])
+           this.is_user_liked = true;
+        }
+          
       })
+      .catch(console.error);
+      
+      axios
+      .request({
+        url: "https://tweeterest.ga/api/comments?tweetId=" + this.tweetId,
+        method: "GET",
+        params: {
+          tweetId: this.tweetId
+        }
+      })
+      .then((response) => {
+        this.comments = response.data.length;
+        for (var i = 0; i < this.comments.length; i++)
+          if (this.has_comments === true) {
+            this.$store.state.tweets.tweetId;
+          } else {
+            this.has_comments = false;
+          }
+          })
       .catch(console.error);
   },
   props: {
@@ -164,7 +200,9 @@ export default {
       login_token: cookies.get("login_token"),
       is_modal: false,
       likes: 0,
+      comments: 0,
       is_user_liked: false,
+      has_comments: false
     };
   },
 };
@@ -252,10 +290,10 @@ export default {
   opacity: 1;
   pointer-events: all;
 }
-.likes {
+.likes, .comments {
   display: flex;
 }
-.likes_number {
+.likes_number, .comments_number {
   margin-top: 5px;
   font-size: 0.8rem;
 }

@@ -53,7 +53,7 @@ export default {
           },
         })
         .then((response) => {
-          alert("Good!");
+          alert("Your info has been updated!");
           this.user = response.data;
           this.$store.commit("update_user", response.data);
         })
