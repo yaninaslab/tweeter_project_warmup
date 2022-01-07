@@ -1,42 +1,49 @@
 <template>
   <div class="icons_grid">
-    <img @click="show_modal" class="icons" src="../assets/message_icon.jpg" alt="" />
+    <img
+      @click="show_modal"
+      class="icons"
+      src="../assets/message_icon.jpg"
+      alt=""
+    />
     <div v-if="is_modal" class="modal active">
       <div class="modal_header">
-      <button @click="close_modal" class="close-button">&times;</button>
-      <input class="twitter"
-      v-model="text"
-      ref="text_input"
-      placeholder="What's up?"
-      maxlength="280"
-    >
-      <br />
+        <button @click="close_modal" class="close-button">&times;</button>
+        <input
+          class="twitter"
+          v-model="text"
+          ref="text_input"
+          placeholder="What's up?"
+          maxlength="280"
+        />
+        <br />
+      </div>
+      <input
+        class="twitter_btn"
+        @click="make_post"
+        type="submit"
+        ref="login_submit"
+        value="Add Tweet"
+      />
+      <div class="overlay"></div>
     </div>
-    <input class="twitter_btn"
-      @click="make_post"
-      type="submit"
-      ref="login_submit"
-      value="Add Tweet"
-    />
-    <div class="overlay"></div>
-
+    <div class="likes">
+      <img
+        class="icons"
+        src="https://www.reshot.com/preview-assets/icons/N3PUY2B9JX/heart-like-N3PUY2B9JX.svg"
+        v-if="!is_user_liked"
+        @click="like_tweet"
+        alt=""
+      />
+      <img
+        class="icons"
+        src="https://www.reshot.com/preview-assets/icons/2HQA9X7CYJ/heartrate-2HQA9X7CYJ.svg"
+        v-else
+        @click="unlike_tweet"
+        alt=""
+      />
+      <span class="likes_number" v-if="likes">{{ likes }}</span>
     </div>
-    <img
-      class="icons"
-      src="https://www.reshot.com/preview-assets/icons/N3PUY2B9JX/heart-like-N3PUY2B9JX.svg"
-      v-if="!is_user_liked"
-      @click="like_tweet"
-      alt=""
-    />
-    <img
-      class="icons"
-      src="https://www.reshot.com/preview-assets/icons/2HQA9X7CYJ/heartrate-2HQA9X7CYJ.svg"
-      v-else
-      @click="unlike_tweet"
-      alt=""
-    />
-    <span v-if="likes">{{likes}}</span>
-
     <img
       class="icons"
       @click="delete_tweet"
@@ -73,7 +80,7 @@ export default {
     },
 
     like_tweet() {
-      console.log('like tweet');
+      console.log("like tweet");
       axios
         .request({
           url: "https://tweeterest.ga/api/tweet-likes",
@@ -122,16 +129,32 @@ export default {
     },
     close_modal() {
       this.is_modal = false;
-    }
+    },
   },
-  created () {
-    axios.request({
-      url: "https://tweeterest.ga/api/tweet-likes?tweetId="+this.tweetId,
-      method: "GET",
-    }).then((response) => {
+  created() {
+    axios
+      .request({
+        url: "https://tweeterest.ga/api/tweet-likes?tweetId=" + this.tweetId,
+        method: "GET",
+      })
+      .then((response) => {
+      
        this.likes = response.data.length;
-       this.is_user_liked = Boolean(response.data.find(item => item.userId === this.$store.state.user.userId));
-    }).catch(console.error);
+       for(var i = 0; i < this.likes.length; i++)
+       
+       if(this.is_user_liked === true) {
+         this.$store.state.user.userId
+       }else {
+         this.is_user_liked = false;
+       }
+        /* this.likes = response.data.length;
+        this.is_user_liked = Boolean(
+          response.data.find(
+            (item) => item.userId === this.$store.state.user.userId
+          )
+        ); */
+      })
+      .catch(console.error);
   },
   props: {
     tweetId: Number,
@@ -203,7 +226,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 .close-button {
   margin-bottom: 70px;
@@ -229,7 +251,13 @@ export default {
 .overlay.active {
   opacity: 1;
   pointer-events: all;
-
+}
+.likes {
+  display: flex;
+}
+.likes_number {
+  margin-top: 5px;
+  font-size: 0.8rem;
 }
 /* .heart_icon {
   background: lightgrey;
