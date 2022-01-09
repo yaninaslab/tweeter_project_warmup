@@ -1,13 +1,16 @@
 <template>
   <div class="icons_grid">
     <div class="comments">
-    <img
-      @click="show_modal"
-      class="icons"
-      src="../assets/message_icon.jpg"
-      alt=""
-    />
-    <span class="comments_number" v-if="comments">{{ comments }}</span></div>
+      <img
+        @click="show_modal"
+        class="icons"
+        src="../assets/message_icon.jpg"
+        alt=""
+      />
+      <span class="comments_number" v-if="comments_qty">{{
+        comments_qty
+      }}</span>
+    </div>
     <div v-if="is_modal" class="modal active">
       <div class="modal_header">
         <button @click="close_modal" class="close-button">&times;</button>
@@ -26,6 +29,11 @@
         ref="login_submit"
         value="Add Comment"
       />
+      <div v-for="comment in comments" :key="comment.commentId">
+        <p>{{ comment.content }}</p>
+        <p v-if="comment.userId === userId">Delete</p>
+
+      </div>
       <div class="overlay"></div>
     </div>
     <div class="likes">
@@ -47,6 +55,7 @@
     </div>
     <img
       class="icons"
+      v-if="is_deletable"
       @click="delete_tweet"
       src="../assets/bin_icon.jpg"
       alt=""
@@ -73,6 +82,9 @@ export default {
           },
         })
         .then(() => {
+          var current_tweets = this.$store.state.tweets.filter(tweet => tweet.tweetId !== this.tweetId);
+          this.$store.commit('update_tweets', current_tweets);
+          
           this.$emit("post_deleted", "The post has been successfully deleted!");
         })
         .catch((error) => {
@@ -144,10 +156,14 @@ export default {
           },
         })
         .then((response) => {
-          this.tweets = response.data;
-          this.comments++
+          this.comments.push(response.data);
+          this.$refs.text_input.value = "",
 
-          this.$emit("comment_added", "The comment has been successfully added!");
+
+          this.$emit(
+            "comment_added",
+            "The comment has been successfully added!"
+          );
         })
         .catch((error) => {
           error.message;
@@ -160,49 +176,49 @@ export default {
         url: "https://tweeterest.ga/api/tweet-likes",
         method: "GET",
         params: {
-          tweetId: this.tweetId
-        }
+          tweetId: this.tweetId,
+        },
       })
       .then((response) => {
         this.likes = response.data.length;
-        for (var i = 0; i < response.data.length; i++){
-          if(cookies.get('user_id') == response.data[i]['userId'])
-           this.is_user_liked = true;
+        for (var i = 0; i < response.data.length; i++) {
+          if (cookies.get("user_id") == response.data[i]["userId"])
+            this.is_user_liked = true;
         }
-          
       })
       .catch(console.error);
-      
-      axios
+
+    axios
       .request({
         url: "https://tweeterest.ga/api/comments?tweetId=" + this.tweetId,
         method: "GET",
         params: {
-          tweetId: this.tweetId
-        }
+          tweetId: this.tweetId,
+        },
       })
       .then((response) => {
-        this.comments = response.data.length;
-        for (var i = 0; i < this.comments.length; i++)
-          if (this.has_comments === true) {
-            this.$store.state.tweets.tweetId;
-          } else {
-            this.has_comments = false;
-          }
-          })
+        this.comments = response.data;
+      })
       .catch(console.error);
   },
   props: {
     tweetId: Number,
+    userId: Number
+  },
+  computed: {
+    comments_qty() {
+      return this.comments.length;
+    },
   },
   data() {
     return {
       login_token: cookies.get("login_token"),
       is_modal: false,
       likes: 0,
-      comments: 0,
+      comments: [],
       is_user_liked: false,
-      has_comments: false
+      has_comments: false,
+      is_deletable: this.userId == this.$store.state.user.userId,
     };
   },
 };
@@ -231,7 +247,7 @@ export default {
   z-index: 10;
   background-color: white;
   width: 500px;
-  height: 300px;
+  min-height: 300px;
   max-width: 80%;
   border-radius: 10px;
 }
@@ -290,10 +306,12 @@ export default {
   opacity: 1;
   pointer-events: all;
 }
-.likes, .comments {
+.likes,
+.comments {
   display: flex;
 }
-.likes_number, .comments_number {
+.likes_number,
+.comments_number {
   margin-top: 5px;
   font-size: 0.8rem;
 }

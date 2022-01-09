@@ -61,7 +61,6 @@ export default new Vuex.Store({
       cookies.remove("user_id");
       store.commit('update_user', {});
     },
-  
   },
 
 })
