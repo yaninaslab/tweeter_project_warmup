@@ -13,8 +13,6 @@
 <style scoped>
 .footer {
     width: 100%;
-    position: absolute;
-    margin-top: 50%;
     color: rgb(18, 152, 205);
     min-height: 5vh;
     display: grid;

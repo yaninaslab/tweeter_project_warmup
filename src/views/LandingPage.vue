@@ -2,12 +2,11 @@
   <div>
       <h2 v-if="logout_message || user_deleted_message">{{ logout_message || user_deleted_message }}</h2>
     <div class="title-grid">
-      <h1 class="sign_up">Sign Up</h1>
-      <h1 class="log_in">Log In</h1>
-    </div>
+    <h2 class="sign_up">Sign Up</h2>
     <register-form></register-form>
+    <h2 class="log_in">Log In</h2>
     <login-form></login-form>
-  </div>
+  </div> </div>
 </template>
 
 <script>
@@ -33,17 +32,13 @@ export default {
 </script>
 
 <style scoped>
-.title-grid {
-  display: grid;
-  place-content: center;
-  grid-auto-flow: column;
-  column-gap: 480px;
-  margin-top: 30px;
-}
+
 .sign_up {
+  margin-top: 100px;
   color: rgb(18, 152, 205);
 }
 .log_in {
+  margin-top: 50px;
   color: rgb(18, 152, 205);
 }
 </style>

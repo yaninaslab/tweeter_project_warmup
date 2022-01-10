@@ -1,6 +1,5 @@
 <template>
   <div class="register">
-    <form action="javascript:void(0)">
       <input class="twitter" type="text" ref="email_input" placeholder="email" /><br />
       <input class="twitter" type="text" ref="username_input" placeholder="username" /><br />
       <input class="twitter" type="password" ref="password_input" placeholder="password" /><br />
@@ -12,7 +11,6 @@
         ref="login_submit"
         value="Sign Up"
       />
-    </form>
   </div>
 </template>
 
@@ -58,20 +56,14 @@ export default {
 </script>
 
 <style scoped>
-form {
-    margin-top: 30px;
-}
 input {
     margin: 5px;
     border: 1px solid skyblue;
 }
-.register {
-  position: absolute;
-  margin-left: 20%;
-}
 .buttons {
-  width: 250px;
+  max-width: 250px;
   height: 40px;
+  padding: 10px;
   background-color: skyblue;
   border-radius: 5px;
   color: white;
@@ -79,7 +71,7 @@ input {
   font-size: large;
 }
 .twitter {
-  width: 350px;
+  max-width: 400px;
   border-radius: 5px;
   background: white;
   border: 1px solid skyblue;

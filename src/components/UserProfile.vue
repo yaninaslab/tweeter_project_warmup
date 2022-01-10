@@ -1,28 +1,26 @@
 <template>
   <div class="edit_profile">
-    <article class="labels">
       <label for="user_id">User ID</label>
-      <label for="email">Email</label>
-      <label for="username">Username</label>
-      <label for="Bio">Bio</label>
-      <label for="dob">Birthdate</label>
-    </article>
-    <article class="update_info">
       <input class="twitter" disabled :value="user.userId" />
-
+      <label for="email">Email</label>
       <input class="twitter" type="text" ref="user_email" :value="user.email" />
-
-      <input class="twitter" type="text" ref="username" :value="user.username" />
-
+      <label for="username">Username</label>
+      <input
+        class="twitter"
+        type="text"
+        ref="username"
+        :value="user.username"
+      />
+      <label for="username">Username</label>
       <input class="twitter" type="text" ref="bio" :value="user.bio" />
-
-      <input class="twitter"
+      <label for="dob">Birthdate</label>
+      <input
+        class="twitter"
         type="text"
         ref="dob"
         placeholder="YYYY-MM-DD"
         :value="user.birthdate"
       />
-    </article>
     <input
       class="buttons"
       @click="update_user"
@@ -70,33 +68,20 @@ export default {
 
 <style scoped>
 .edit_profile {
+  margin-top: 100px;
   display: grid;
-  grid-auto-flow: column;
-}
-.user_info {
-  display: grid;
-  place-items: center;
-}
-.update_info {
-  display: grid;
-}
-.labels {
-  display: grid;
-  place-items: center;
+  place-content: center;
 }
 label {
   font-weight: bold;
   color: rgb(18, 152, 205);
-}
-.inline {
-  display: inline;
 }
 input {
   margin: 5px;
   border: 1px solid skyblue;
 }
 .twitter {
-  width: 350px;
+  max-width: 350px;
   border-radius: 5px;
   background: white;
   border: 1px solid skyblue;

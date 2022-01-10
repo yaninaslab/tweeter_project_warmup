@@ -63,12 +63,15 @@ export default {
 <style scoped>
 .twitter,
 .twitter_image {
-  width: 350px;
+  max-width: 350px;
   border-radius: 5px;
   background: white;
   border: 1px solid skyblue;
   outline: none;
   padding: 10px;
+}
+.twitter {
+  margin-top: 10px;
 }
 .twitter:focus,
 .twitter_image:focus {
@@ -93,4 +96,5 @@ input,
 textarea {
   margin: 5px;
 }
+
 </style>

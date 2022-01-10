@@ -43,7 +43,8 @@ export default {
 
 <style scoped>
 .twitter_btn {
-  width: 150px;
+  margin-top: 100px;
+  width: 100px;
   height: 40px;
   background-color: skyblue;
   border-radius: 5px;

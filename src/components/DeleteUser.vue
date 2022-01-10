@@ -1,9 +1,14 @@
 <template>
-  <div>
-      <input class="twitter" type="password" v-model="password" placeholder="Enter your password to delete user" >
+  <div class="delete_user">
+    <input
+      class="twitter password"
+      type="password"
+      v-model="password"
+      placeholder="Enter your password to delete user"
+    />
     <input
       :disabled="!password"
-      class="buttons"
+      class="twitter buttons"
       @click="delete_user"
       type="submit"
       value="Delete User"
@@ -29,8 +34,8 @@ export default {
           },
         })
         .then(() => {
-            this.$store.dispatch('log_out');
-            this.$router.push({ path: "/", query: {user_deleted:true} });
+          this.$store.dispatch("log_out");
+          this.$router.push({ path: "/", query: { user_deleted: true } });
         })
         .catch((error) => {
           error.message;
@@ -38,16 +43,22 @@ export default {
     },
   },
   data() {
-      return {
-          password: "",
-      }
+    return {
+      password: "",
+    };
   },
 };
 </script>
 
 <style scoped>
+.delete_user {
+  margin-top: 30px;
+  display: grid;
+  place-items: center;
+}
 .twitter {
-  width: 350px;
+  margin-top: 10px;
+  max-width: 350px;
   border-radius: 5px;
   background: white;
   border: 1px solid skyblue;
@@ -60,7 +71,6 @@ export default {
 }
 .buttons {
   display: grid;
-  margin-left: 83%;
   width: 150px;
   height: 40px;
   background-color: skyblue;

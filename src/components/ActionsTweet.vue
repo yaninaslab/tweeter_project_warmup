@@ -30,7 +30,12 @@
         value="Add Comment"
       />
       <div v-for="comment in comments" :key="comment.commentId">
-        <p>{{ comment.content }}</p>
+        <p v-if="!is_editing">{{ comment.content }}</p>
+        <div v-else>
+          <input value="comment.content" >
+          <input type="submit">
+        </div>
+        <p v-if="comment.userId === userId">Edit</p>
         <p v-if="comment.userId === userId">Delete</p>
 
       </div>
@@ -84,7 +89,7 @@ export default {
         .then(() => {
           var current_tweets = this.$store.state.tweets.filter(tweet => tweet.tweetId !== this.tweetId);
           this.$store.commit('update_tweets', current_tweets);
-          
+
           this.$emit("post_deleted", "The post has been successfully deleted!");
         })
         .catch((error) => {
@@ -219,6 +224,7 @@ export default {
       is_user_liked: false,
       has_comments: false,
       is_deletable: this.userId == this.$store.state.user.userId,
+      is_editing: false,
     };
   },
 };
