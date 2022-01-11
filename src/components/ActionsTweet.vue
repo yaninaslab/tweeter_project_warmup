@@ -29,15 +29,23 @@
         ref="login_submit"
         value="Add Comment"
       />
-      <div v-for="comment in comments" :key="comment.commentId">
-        <p v-if="!is_editing">{{ comment.content }}</p>
-        <div v-else>
-          <input value="comment.content" >
-          <input type="submit">
-        </div>
-        <p v-if="comment.userId === userId">Edit</p>
-        <p v-if="comment.userId === userId">Delete</p>
+      <div
+        class="comments_list"
+        v-for="comment in comments"
+        :key="comment.commentId"
+      >
+        <p>{{ comment.commentId }}</p>
+        <p class="content">{{ comment.content }}</p>
+        <p>{{ comment.username }}</p>
+        <p>{{ comment.createdAt }}</p>
+        <p v-if="!is_editing">{{ comment.tweetId }}</p>
 
+        <div v-else>
+          <input value="comment.content" />
+          <input type="submit" />
+        </div>
+        <!-- <p v-if="comment.userId === userId">Edit</p>
+        <p v-if="comment.userId === userId">Delete</p> -->
       </div>
       <div class="overlay"></div>
     </div>
@@ -87,8 +95,10 @@ export default {
           },
         })
         .then(() => {
-          var current_tweets = this.$store.state.tweets.filter(tweet => tweet.tweetId !== this.tweetId);
-          this.$store.commit('update_tweets', current_tweets);
+          var current_tweets = this.$store.state.tweets.filter(
+            (tweet) => tweet.tweetId !== this.tweetId
+          );
+          this.$store.commit("update_tweets", current_tweets);
 
           this.$emit("post_deleted", "The post has been successfully deleted!");
         })
@@ -162,13 +172,11 @@ export default {
         })
         .then((response) => {
           this.comments.push(response.data);
-          this.$refs.text_input.value = "",
-
-
-          this.$emit(
-            "comment_added",
-            "The comment has been successfully added!"
-          );
+          (this.$refs.text_input.value = ""),
+            this.$emit(
+              "comment_added",
+              "The comment has been successfully added!"
+            );
         })
         .catch((error) => {
           error.message;
@@ -195,7 +203,7 @@ export default {
 
     axios
       .request({
-        url: "https://tweeterest.ga/api/comments?tweetId=" + this.tweetId,
+        url: "https://tweeterest.ga/api/comments",
         method: "GET",
         params: {
           tweetId: this.tweetId,
@@ -208,7 +216,7 @@ export default {
   },
   props: {
     tweetId: Number,
-    userId: Number
+    userId: Number,
   },
   computed: {
     comments_qty() {
@@ -321,53 +329,14 @@ export default {
   margin-top: 5px;
   font-size: 0.8rem;
 }
-/* .heart_icon {
-  background: lightgrey;
-  position: relative;
-  height: 15px;
-  width: 15px;
-  transform: rotate(-45deg) scale(1);
-  z-index: 20;
+.comments_list {
+  margin-top: 5px;
+  display: grid;
+  place-items: center;
+  border: 1px solid skyblue;
 }
-.heart_icon_liked {
-  background: skyblue;
-  position: relative;
-  height: 15px;
-  width: 15px;
-  transform: rotate(-45deg) scale(1);
-  z-index: 20;
-} */
-/* .heart_icon:hover {
-  cursor: pointer;
-  animation: pulse 0.2s linear;
-  background: blue;
-} */
-/* @keyframes pulse {
-  0% {
-    transform: rotate(-45deg) scale(1);
-  }
-  100% {
-    transform: rotate(-45deg) scale(1.2);
-  }
-} */
-/* .heart_icon::after {
-  background: inherit;
-  border-radius: 50%;
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: 0;
-  height: 15px;
-  width: 15px;
+.content {
+  font-weight: bold;
+  font-size: 1.1rem;
 }
-.heart_icon::before {
-  background: inherit;
-  border-radius: 50%;
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -50%;
-  height: 15px;
-  width: 15px;
-} */
 </style>
