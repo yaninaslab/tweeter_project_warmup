@@ -70,7 +70,7 @@
       class="icons"
       v-if="is_deletable"
       @click="delete_tweet"
-      src="../assets/bin_icon.jpg"
+      src="https://www.reshot.com/preview-assets/icons/BXED96GWPV/waste-bin-BXED96GWPV.svg"
       alt=""
     />
   </div>
@@ -87,7 +87,7 @@ export default {
     delete_tweet() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/tweets",
+          url: `${process.env.VUE_APP_API_URL}/api/tweets`,
           method: "DELETE",
           data: {
             loginToken: this.login_token,
@@ -111,7 +111,7 @@ export default {
       console.log("like tweet");
       axios
         .request({
-          url: "https://tweeterest.ga/api/tweet-likes",
+          url: `${process.env.VUE_APP_API_URL}/api/tweet-likes`,
           method: "POST",
           data: {
             loginToken: this.login_token,
@@ -128,7 +128,7 @@ export default {
     unlike_tweet() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/tweet-likes",
+          url: `${process.env.VUE_APP_API_URL}/api/tweet-likes`,
           method: "DELETE",
           data: {
             loginToken: this.login_token,
@@ -161,7 +161,7 @@ export default {
     add_comment() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/comments",
+          url: `${process.env.VUE_APP_API_URL}/api/comments`,
 
           method: "POST",
           data: {
@@ -186,7 +186,7 @@ export default {
   created() {
     axios
       .request({
-        url: "https://tweeterest.ga/api/tweet-likes",
+        url: `${process.env.VUE_APP_API_URL}/api/tweet-likes`,
         method: "GET",
         params: {
           tweetId: this.tweetId,
@@ -203,7 +203,7 @@ export default {
 
     axios
       .request({
-        url: "https://tweeterest.ga/api/comments",
+        url: `${process.env.VUE_APP_API_URL}/api/comments`,
         method: "GET",
         params: {
           tweetId: this.tweetId,

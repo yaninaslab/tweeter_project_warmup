@@ -1,13 +1,24 @@
 <template>
   <div class="login">
-      <input class="twitter" type="text" ref="email_input" placeholder="email" /><br />
-      <input class="twitter" type="password" ref="password_input" placeholder="password" /><br />
-      <input class="buttons"
-        @click="attempt_login"
-        type="submit"
-        ref="login_submit"
-        value="Log In"
-      />
+    <input
+      class="twitter"
+      type="text"
+      ref="email_input"
+      placeholder="email"
+    /><br />
+    <input
+      class="twitter"
+      type="password"
+      ref="password_input"
+      placeholder="password"
+    /><br />
+    <input
+      class="buttons"
+      @click="attempt_login"
+      type="submit"
+      ref="login_submit"
+      value="Log In"
+    />
   </div>
 </template>
 
@@ -22,7 +33,7 @@ export default {
     attempt_login() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/login",
+          url: `${process.env.VUE_APP_API_URL}/api/login`,
 
           method: "POST",
           data: {
@@ -31,8 +42,7 @@ export default {
           },
         })
         .then((response) => {
-
-          this.$store.commit('update_user', response.data)
+          this.$store.commit("update_user", response.data);
           cookies.set("login_token", response.data.loginToken);
           cookies.set("user_id", response.data.userId);
           this.$router.push({ path: "/feed" });
@@ -42,7 +52,6 @@ export default {
         });
     },
   },
-  
 };
 </script>
 

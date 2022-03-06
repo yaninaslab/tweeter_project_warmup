@@ -26,7 +26,7 @@ export default {
     delete_user() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/users",
+          url: `${process.env.VUE_APP_API_URL}/api/users`,
           method: "DELETE",
           data: {
             loginToken: this.$store.state.user.loginToken,

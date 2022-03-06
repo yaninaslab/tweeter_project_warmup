@@ -1,26 +1,21 @@
 <template>
   <div class="edit_profile">
-      <label for="user_id">User ID</label>
-      <input class="twitter" disabled :value="user.userId" />
-      <label for="email">Email</label>
-      <input class="twitter" type="text" ref="user_email" :value="user.email" />
-      <label for="username">Username</label>
-      <input
-        class="twitter"
-        type="text"
-        ref="username"
-        :value="user.username"
-      />
-      <label for="username">Username</label>
-      <input class="twitter" type="text" ref="bio" :value="user.bio" />
-      <label for="dob">Birthdate</label>
-      <input
-        class="twitter"
-        type="text"
-        ref="dob"
-        placeholder="YYYY-MM-DD"
-        :value="user.birthdate"
-      />
+    <label for="user_id">User ID</label>
+    <input class="twitter" disabled :value="user.userId" />
+    <label for="email">Email</label>
+    <input class="twitter" type="text" ref="user_email" :value="user.email" />
+    <label for="username">Username</label>
+    <input class="twitter" type="text" ref="username" :value="user.username" />
+    <label for="username">Username</label>
+    <input class="twitter" type="text" ref="bio" :value="user.bio" />
+    <label for="dob">Birthdate</label>
+    <input
+      class="twitter"
+      type="text"
+      ref="dob"
+      placeholder="YYYY-MM-DD"
+      :value="user.birthdate"
+    />
     <input
       class="buttons"
       @click="update_user"
@@ -40,7 +35,7 @@ export default {
     update_user() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/users",
+          url: `${process.env.VUE_APP_API_URL}/api/users`,
           method: "PATCH",
           data: {
             loginToken: this.$store.state.user.loginToken,

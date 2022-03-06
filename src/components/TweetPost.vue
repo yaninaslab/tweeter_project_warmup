@@ -32,7 +32,7 @@ export default {
     make_post() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/tweets",
+          url: `${process.env.VUE_APP_API_URL}/api/users`,
 
           method: "POST",
           data: {
@@ -96,5 +96,4 @@ input,
 textarea {
   margin: 5px;
 }
-
 </style>

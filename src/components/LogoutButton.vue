@@ -15,7 +15,7 @@ export default {
     log_out() {
       axios
         .request({
-          url: "https://tweeterest.ga/api/login",
+          url: `${process.env.VUE_APP_API_URL}/api/login`,
 
           method: "DELETE",
           data: {
@@ -23,9 +23,8 @@ export default {
           },
         })
         .then(() => {
-        
-          this.$store.dispatch('log_out');
-          this.$router.push({ path: "/", query: {logout:true} });
+          this.$store.dispatch("log_out");
+          this.$router.push({ path: "/", query: { logout: true } });
         })
         .catch((error) => {
           error.message;
@@ -39,7 +38,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .twitter_btn {
