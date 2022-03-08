@@ -3,11 +3,9 @@
     <h2>{{ success_message }}</h2>
     <div class="tweets_list">
       <article v-for="tweet in tweets" :key="tweet.tweetId">
-        <h5>TweetId: {{ tweet[0] }}</h5>
-        <h5>UserId: {{ tweet[1] }}</h5>
-        <h5>Posted by: {{ tweet[2] }}</h5>
-        <p>Content: {{ tweet[3] }}</p>
-        <h6>Date: {{ tweet[4] }}</h6>
+        <h5>Posted by: {{ tweet.username }}</h5>
+        <p>Content: {{ tweet.content }}</p>
+        <h6>Date: {{ tweet.createdAt }}</h6>
         <actions-tweet
           @post_deleted="react_to_post_deleted"
           :tweetId="tweet.tweetId"

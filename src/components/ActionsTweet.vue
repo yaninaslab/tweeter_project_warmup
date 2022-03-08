@@ -34,10 +34,11 @@
         v-for="comment in comments"
         :key="comment.commentId"
       >
-        <p>{{ comment.commentId }}</p>
-        <p class="content">{{ comment.content }}</p>
-        <p>{{ comment.username }}</p>
-        <p>{{ comment.createdAt }}</p>
+        <p>CommentId: {{ comment[0] }}</p>
+        <p>TweetId: {{ comment[1] }}</p>
+        <p class="content">Content: {{ comment[4] }}</p>
+        <p>Posted by: {{ comment[3] }}</p>
+        <p>Date: {{ comment[5] }}</p>
         <p v-if="!is_editing">{{ comment.tweetId }}</p>
 
         <div v-else>
@@ -68,7 +69,7 @@
     </div>
     <img
       class="icons"
-      v-if="is_deletable"
+      v-if="!is_deletable"
       @click="delete_tweet"
       src="https://www.reshot.com/preview-assets/icons/BXED96GWPV/waste-bin-BXED96GWPV.svg"
       alt=""
@@ -100,7 +101,10 @@ export default {
           );
           this.$store.commit("update_tweets", current_tweets);
 
-          this.$emit("post_deleted", "The post has been successfully deleted!");
+          this.$emit(
+            "post_deleted",
+            "Your tweet has been successfully deleted!"
+          );
         })
         .catch((error) => {
           error.message;
@@ -175,7 +179,7 @@ export default {
           (this.$refs.text_input.value = ""),
             this.$emit(
               "comment_added",
-              "The comment has been successfully added!"
+              "Your comment has been successfully added!"
             );
         })
         .catch((error) => {
@@ -231,6 +235,7 @@ export default {
       comments: [],
       is_user_liked: false,
       has_comments: false,
+      // is_deletable: true,
       is_deletable: this.userId == this.$store.state.user.userId,
       is_editing: false,
     };

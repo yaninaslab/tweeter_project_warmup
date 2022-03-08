@@ -7,11 +7,6 @@
       maxlength="280"
     /><br />
     <input
-      class="twitter_image"
-      ref="image_input"
-      placeholder="imageURL"
-    /><br />
-    <input
       class="twitter_btn"
       @click="make_post"
       type="submit"
@@ -32,19 +27,18 @@ export default {
     make_post() {
       axios
         .request({
-          url: `${process.env.VUE_APP_API_URL}/api/users`,
+          url: `${process.env.VUE_APP_API_URL}/api/tweets`,
 
           method: "POST",
           data: {
             loginToken: this.login_token,
             content: this.$refs.text_input.value,
-            imageUrl: this.$refs.image_input.value,
           },
         })
         .then((response) => {
           this.tweets = response.data;
 
-          this.$emit("post_sent", "The post has been successfully sent!");
+          this.$emit("post_sent", "Your tweet has been successfully added!");
         })
         .catch((error) => {
           error.message;
@@ -61,8 +55,7 @@ export default {
 </script>
 
 <style scoped>
-.twitter,
-.twitter_image {
+.twitter {
   max-width: 350px;
   border-radius: 5px;
   background: white;
@@ -72,9 +65,10 @@ export default {
 }
 .twitter {
   margin-top: 10px;
+  width: 300px;
+  height: 8px;
 }
-.twitter:focus,
-.twitter_image:focus {
+.twitter:focus {
   border: 1px solid #56b4ef;
   box-shadow: 0px 0px 3px 1px #c8def0;
 }
@@ -87,10 +81,6 @@ export default {
   font-weight: bold;
   font-size: large;
   border: 1px solid skyblue;
-}
-.twitter_image {
-  width: 200px;
-  height: 8px;
 }
 input,
 textarea {
