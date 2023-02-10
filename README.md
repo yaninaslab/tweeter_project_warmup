@@ -1,4 +1,4 @@
-# tweeter_project_warmup
+# TweeterClone Web App designed to post, edit and delete tweets and follow and unfollow users.
 
 ## Project setup
 ```
@@ -19,6 +19,4 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<img width="915" alt="Screenshot 2023-02-10 at 12 24 47 PM" src="https://user-images.githubusercontent.com/90276782/218156375-a0741e43-d7f5-45b8-8ac0-bcbac100d9a7.png">
